@@ -34,4 +34,9 @@ class MessageNotification implements ShouldBroadcast
     {
         return new Channel('notification');
     }
+
+    public function broadcastAs()
+    {
+        return 'create';
+    }
 }
