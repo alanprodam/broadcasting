@@ -19,10 +19,10 @@ Route::get('/', function () {
 });
 
 Route::get('/event', function () {
-//    MessageNotification::dispatch('This is the first message');
     $data['name'] = 'Alan';
     $data['url'] = 'http://192.168.88.231/images/0D0j22w1wh33L58b2j21185Vc4b1tIJ1Ry.jpg';
-    event(new MessageNotification($data));
+    MessageNotification::dispatch($data);
+//    event(new MessageNotification($data));
     echo 'Message send';
 });
 

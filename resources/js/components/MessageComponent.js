@@ -34,6 +34,7 @@ export default class Message extends Component {
     render() {
         return (
             <div className="container">
+                {/*<p> {JSON.stringify(this.state.message)} </p>*/}
                 {
                     this.state.message.map((msg)=>{
                         return(
