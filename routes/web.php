@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('/event', function () {
 //    MessageNotification::dispatch('This is the first message');
     event(new MessageNotification('This is the first message'));
+    echo 'Message send';
 });
 
 Route::get('/listen', function () {
