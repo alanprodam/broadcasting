@@ -37,6 +37,6 @@ class MessageNotification implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'notification';
+        return 'create';
     }
 }
