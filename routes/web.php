@@ -18,10 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/event', function () {
+Route::get('/broadcasting', function () {
     $data['name'] = 'Alan';
     $data['url'] = 'http://192.168.88.231/images/0D0j22w1wh33L58b2j21185Vc4b1tIJ1Ry.jpg';
-    MessageNotification::dispatch($data);
+//    MessageNotification::dispatch($data);
+    broadcast(new MessageNotification($data));
 //    event(new MessageNotification($data));
     echo 'Message send';
 });

@@ -3,6 +3,8 @@
     <head>
         <title>Event</title>
 
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA_Compatible" content="ie=edge">
@@ -24,6 +26,22 @@
             .container .credit { margin: 20px 0; }
         </style>
 
+{{--        <script>--}}
+
+{{--            // Enable pusher logging - don't include this in production--}}
+{{--            Pusher.logToConsole = true;--}}
+
+{{--            var pusher = new Pusher('local', {--}}
+{{--                cluster: 'mt1',--}}
+{{--                forceTLS: false--}}
+{{--            });--}}
+
+{{--            var channel = pusher.subscribe('notification');--}}
+{{--            channel.bind('create', function(data) {--}}
+{{--                alert(JSON.stringify(data));--}}
+{{--            });--}}
+{{--        </script>--}}
+
     </head>
 
     <body>
@@ -43,7 +61,7 @@
         <!-- importar component vue -->
 
         <script src="{{ asset('js/app.js') }}" ></script>
-        <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
     </body>
 </html>

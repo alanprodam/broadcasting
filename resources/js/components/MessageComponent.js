@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Echo from "laravel-echo";
 
 export default class Message extends Component {
 
@@ -16,9 +17,29 @@ export default class Message extends Component {
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('65c96aa5edb81959f03c', {
-            cluster: 'mt1',
-            forceTLS: true
+        window.Pusher = require('pusher-js');
+
+        window.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: 'local',
+            // key: process.env.MIX_PUSHER_APP_KEY,
+            // wsHost: process.env.PUSHER_HOST,
+            wsHost: '127.0.0.1',
+            wsPort: 6001,
+            forceTLS: false,
+            disableStats: true,
+        });
+
+
+        var pusher = new Pusher('local', {
+            broadcaster: 'pusher',
+            key: 'local',
+            // key: process.env.MIX_PUSHER_APP_KEY,
+            // wsHost: process.env.PUSHER_HOST,
+            wsHost: '127.0.0.1',
+            wsPort: 6001,
+            forceTLS: false,
+            disableStats: true,
         });
 
         const this2 = this
@@ -27,7 +48,27 @@ export default class Message extends Component {
             const message = this2.state.message
             message.push(data.message)
             this2.setState({message:message})
+            // console.log({message:message});
         });
+
+        // var channel = pusher.subscribe('notification');
+        // channel.bind('create', function(data) {
+        //     console.log(JSON.stringify(data));
+        // });
+
+        // var channel = pusher.subscribe('notification');
+        // channel.bind('create', function(data) {
+        //     console.log(JSON.stringify(data));
+        // });
+
+        // console.log(JSON.stringify(this.state.message));
+        // const this2 = this
+        // var channel = pusher.subscribe('notification');
+        // channel.bind('create', function(data) {
+        //     const message = this2.state.message
+        //     message.push(data.message)
+        //     this2.setState({message:message})
+        // });
     }
 
 
@@ -35,6 +76,7 @@ export default class Message extends Component {
         return (
             <div className="container">
                 {/*<p> {JSON.stringify(this.state.message)} </p>*/}
+
                 {
                     this.state.message.map((msg)=>{
                         return(

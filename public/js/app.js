@@ -2117,13 +2117,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js"); // window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     forceTLS: true,
+//     encryption: true
+// });
+
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "65c96aa5edb81959f03c",
-  cluster: "mt1",
-  forceTLS: true,
-  encryption: true
+  key: "local",
+  // wsHost: process.env.PUSHER_HOST,
+  wsHost: '127.0.0.1',
+  wsPort: 6001,
+  forceTLS: false,
+  disableStats: true
 });
 
 /***/ }),
@@ -2190,7 +2199,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2212,6 +2222,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2241,9 +2252,26 @@ var Message = /*#__PURE__*/function (_Component) {
       console.log("Inicio programa message... "); // Enable pusher logging - don't include this in production
 
       Pusher.logToConsole = true;
-      var pusher = new Pusher('65c96aa5edb81959f03c', {
-        cluster: 'mt1',
-        forceTLS: true
+      window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+      window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
+        broadcaster: 'pusher',
+        key: 'local',
+        // key: process.env.MIX_PUSHER_APP_KEY,
+        // wsHost: process.env.PUSHER_HOST,
+        wsHost: '127.0.0.1',
+        wsPort: 6001,
+        forceTLS: false,
+        disableStats: true
+      });
+      var pusher = new Pusher('local', {
+        broadcaster: 'pusher',
+        key: 'local',
+        // key: process.env.MIX_PUSHER_APP_KEY,
+        // wsHost: process.env.PUSHER_HOST,
+        wsHost: '127.0.0.1',
+        wsPort: 6001,
+        forceTLS: false,
+        disableStats: true
       });
       var this2 = this;
       var channel = pusher.subscribe('notification');
@@ -2252,19 +2280,34 @@ var Message = /*#__PURE__*/function (_Component) {
         message.push(data.message);
         this2.setState({
           message: message
-        });
-      });
+        }); // console.log({message:message});
+      }); // var channel = pusher.subscribe('notification');
+      // channel.bind('create', function(data) {
+      //     console.log(JSON.stringify(data));
+      // });
+      // var channel = pusher.subscribe('notification');
+      // channel.bind('create', function(data) {
+      //     console.log(JSON.stringify(data));
+      // });
+      // console.log(JSON.stringify(this.state.message));
+      // const this2 = this
+      // var channel = pusher.subscribe('notification');
+      // channel.bind('create', function(data) {
+      //     const message = this2.state.message
+      //     message.push(data.message)
+      //     this2.setState({message:message})
+      // });
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "container",
         children: this.state.message.map(function (msg) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
               children: "Nome "
-            }), " = ", msg.name, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
+            }), " = ", msg.name, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
               children: " Image "
             }), " = ", msg.url]
           }) // <Image
@@ -2283,7 +2326,7 @@ var Message = /*#__PURE__*/function (_Component) {
 
 
 if (document.getElementById('message-component')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Message, {}), document.getElementById('message-component'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Message, {}), document.getElementById('message-component'));
 }
 
 /***/ }),
